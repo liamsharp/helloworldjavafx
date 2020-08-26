@@ -14,11 +14,60 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    
+	<dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-base</artifactId>
+        <version>${javafx.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-controls</artifactId>
+        <version>${javafx.version}</version>
+      </dependency>
+    
   </dependencies>
 
+  <properties>
+      <javafx.version>11.0.2</javafx.version>
+  </properties>
 
   <build>
       <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>11</source>
+          <target>11</target>
+        </configuration>
+      </plugin>
+
+
+      <!-- Compile with Java 11 by default. -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-toolchains-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>toolchain</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <toolchains>
+            <jdk>
+              <version>11.0.7</version>
+              <vendor>AdoptOpenJDK</vendor>
+            </jdk>
+          </toolchains>
+        </configuration>
+      </plugin>
+
 
       <!-- Creates a jar file -->
       <plugin>
